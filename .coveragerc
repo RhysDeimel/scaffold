@@ -1,0 +1,10 @@
+[run]
+source =
+    scaffold
+
+[paths]
+source =
+    src/scaffold
+
+[report]
+fail_under = 70
