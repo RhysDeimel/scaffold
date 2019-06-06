@@ -1,5 +1,8 @@
 import pytest
 
+# Feel free to throw your global test fixtures and other junk in here for pytest
+# to use
+
 
 def pytest_addoption(parser):
     parser.addoption(
