@@ -5,7 +5,3 @@
 # them as demonstrated in the unused example below
 
 from scaffold import foo
-
-
-if __name__ == "__main__":
-    pass
