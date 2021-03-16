@@ -45,5 +45,5 @@ jobs:
           git config user.name autoblack
           git config user.email 17837523+RhysDeimel@users.noreply.github.com
           git add .
-          git commit -m "fmt: black'd"
+          git commit -m "fmt: autoblack'd"
           git push
