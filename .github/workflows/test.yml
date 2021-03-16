@@ -4,6 +4,7 @@ on: [push]
 
 env:
   PY_COLORS: 1
+  FORCE_COLOR: 1
 
 
 jobs:
