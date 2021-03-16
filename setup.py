@@ -8,7 +8,7 @@ setuptools.setup(
     python_requires=">3.6",
     version="0.0.1dev",
     author="Swag mcSwaggerson",
-    author_email="swag.mcswaggerson@nirovision.com",
+    author_email="swag.mcswaggerson@swagpalace.com",
     description="Template repo to show tox and pytest friendship",
     long_description=long_description,
     long_description_content_type="text/markdown",
