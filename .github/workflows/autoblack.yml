@@ -35,15 +35,13 @@ jobs:
       - name: Install Black
         run: pip install black
 
-      - name: Run black --check .
-        run: black --check .
-
-      - name: If needed, commit black changes to the pull request
-        if: ${{ failure() }}
+      - name: Run black and commit changes if needed
         run: |
-          black .
-          git config user.name autoblack
-          git config user.email 17837523+RhysDeimel@users.noreply.github.com
-          git add .
-          git commit -m "fmt: autoblack'd"
-          git push
+          if ! black --check -q . ; then
+              black .
+              git config user.name autoblack
+              git config user.email 17837523+RhysDeimel@users.noreply.github.com
+              git add .
+              git commit -m "fmt: autoblack'd"
+              git push
+          fi
