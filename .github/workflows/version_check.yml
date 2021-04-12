@@ -8,14 +8,14 @@ jobs:
     runs-on: ubuntu-20.04
     
     steps:
-      - name: Checkout 
+      - name: Checkout compare
         uses: actions/checkout@v2
 
-      - name:
+      - name: Checkout base
         uses: actions/checkout@v2
         with:
-          ref: ''
-          path: ''
+          ref: ${{ github.base_ref }}
+          path: 'base'
       
       - name: Setup Python
         uses: actions/setup-python@v2
@@ -36,3 +36,8 @@ jobs:
 
       - name: Install Packaging
         run: pip install packaging
+
+      - name: debug
+        run: |
+          ls -alh
+          ls -alh base
