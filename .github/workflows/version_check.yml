@@ -10,12 +10,20 @@ jobs:
     steps:
       - name: Checkout compare
         uses: actions/checkout@v2
+          path: 'source'
 
       - name: Checkout base
         uses: actions/checkout@v2
         with:
           ref: ${{ github.base_ref }}
-          path: 'base'
+          path: 'destination'
+
+      - name: Checkout utils for version_check
+        uses: actions/checkout@v2
+        with:
+          repository: televate-au/utils
+          token: ${{ secrets.PAT }}
+          path: 'utils'
       
       - name: Setup Python
         uses: actions/setup-python@v2
@@ -33,11 +41,11 @@ jobs:
             ${{ runner.os }}-pip-
             ${{ runner.os }}-
 
+      - name: Create requirements.txt for cache
+        run: echo "packaging" > requirements.txt
 
       - name: Install Packaging
-        run: pip install packaging
+        run: pip install -r requirements.txt
 
-      - name: debug
-        run: |
-          ls -alh
-          ls -alh base
+      - name: Check version is incremented
+        run: python utils/version_check.py source/setup.py destination/setup.py
