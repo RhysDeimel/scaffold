@@ -10,6 +10,7 @@ jobs:
     steps:
       - name: Checkout compare
         uses: actions/checkout@v2
+        with:
           path: 'source'
 
       - name: Checkout base
