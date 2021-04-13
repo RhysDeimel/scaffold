@@ -5,7 +5,10 @@
 
 name: autoblack
 
-on: [push]
+on:
+  push:
+    paths:
+    - '**.py'
 
 jobs:
   build:
@@ -20,6 +23,9 @@ jobs:
         with:
           python-version: 3.9
 
+      - name: Create requirements.txt for cache
+        run: echo "black" > requirements.txt
+
       - name: Cache pip
         uses: actions/cache@v2
         with:
@@ -33,7 +39,7 @@ jobs:
 
 
       - name: Install Black
-        run: pip install black
+        run: pip install -r requirements.txt
 
       - name: Run black and commit changes if needed
         run: |
