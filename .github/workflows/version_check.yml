@@ -1,6 +1,10 @@
 name: version check
 
-on: [pull_request]
+on:
+  pull_request:
+    paths:
+    - src/**
+    - setup.py
 
 jobs:
   build:
@@ -31,6 +35,9 @@ jobs:
         with:
           python-version: 3.9
 
+      - name: Create requirements.txt for cache
+        run: echo "packaging" > requirements.txt
+
       - name: Cache pip
         uses: actions/cache@v2
         with:
@@ -41,9 +48,6 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-pip-
             ${{ runner.os }}-
-
-      - name: Create requirements.txt for cache
-        run: echo "packaging" > requirements.txt
 
       - name: Install Packaging
         run: pip install -r requirements.txt
