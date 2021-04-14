@@ -4,11 +4,11 @@ on:
   push:
     paths:
     - '**.py'
-    - 'tox.ini'
+    - tox.ini
   pull_request:
     paths:
     - '**.py'
-    - 'tox.ini'
+    - tox.ini
 
 env:
   PY_COLORS: 1
