@@ -1,12 +1,11 @@
 name: run tests
 
-on:
-  push:
-    paths:
-    - '**.py'
-    - 'requirements.txt'
-    - 'tox.ini'
-    - 'coveragerc'
+on: [push, pull_request]
+  paths:
+  - '**.py'
+  - 'requirements.txt'
+  - 'tox.ini'
+  - 'coveragerc'
 
 env:
   PY_COLORS: 1

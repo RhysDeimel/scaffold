@@ -5,6 +5,10 @@ on:
     paths:
     - '**.py'
     - 'tox.ini'
+  pull_request:
+    paths:
+    - '**.py'
+    - 'tox.ini'
 
 env:
   PY_COLORS: 1
