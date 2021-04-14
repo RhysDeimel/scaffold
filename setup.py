@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 setuptools.setup(
     name="scaffold",
     python_requires=">3.6",
-    version="1.0.0",
+    version="1.0.1",
     author="Swag mcSwaggerson",
     author_email="swag.mcswaggerson@swagpalace.com",
     description="Template repo to show tox and pytest friendship",

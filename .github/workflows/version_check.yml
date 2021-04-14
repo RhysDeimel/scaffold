@@ -3,7 +3,7 @@ name: version check
 on:
   pull_request:
     paths:
-    - src/**
+    - 'src/**'
     - setup.py
 
 jobs:
@@ -15,20 +15,20 @@ jobs:
       - name: Checkout compare
         uses: actions/checkout@v2
         with:
-          path: 'source'
+          path: source
 
       - name: Checkout base
         uses: actions/checkout@v2
         with:
           ref: ${{ github.base_ref }}
-          path: 'destination'
+          path: destination
 
       - name: Checkout utils for version_check
         uses: actions/checkout@v2
         with:
           repository: televate-au/utils
           token: ${{ secrets.PAT }}
-          path: 'utils'
+          path: utils
       
       - name: Setup Python
         uses: actions/setup-python@v2

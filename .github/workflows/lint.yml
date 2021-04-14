@@ -1,18 +1,14 @@
-name: run tests
+name: lint
 
 on:
   push:
     paths:
     - '**.py'
-    - requirements.txt
     - tox.ini
-    - .coveragerc
   pull_request:
     paths:
     - '**.py'
-    - requirements.txt
     - tox.ini
-    - .coveragerc
 
 env:
   PY_COLORS: 1
@@ -23,9 +19,6 @@ jobs:
   build:
 
     runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        python: [3.8, 3.9]
 
     steps:
       - uses: actions/checkout@v2
@@ -33,7 +26,10 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v2
         with:
-          python-version: ${{ matrix.python }}
+          python-version: 3.9
+
+      - name: Create requirements.txt for cache
+        run: echo "flake8" > requirements.txt
 
       - name: Cache pip
         uses: actions/cache@v2
@@ -49,6 +45,5 @@ jobs:
       - name: Install requirements
         run: pip install -r requirements.txt
 
-      - name: Run Tox
-        # Run tox using the version of Python in `PATH`
-        run: tox -e clean,py,report
+      - name: Run flake8
+        run: flake8 src/ tests/ setup.py
