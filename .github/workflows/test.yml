@@ -4,15 +4,15 @@ on:
   push:
     paths:
     - '**.py'
-    - 'requirements.txt'
-    - 'tox.ini'
-    - 'coveragerc'
+    - requirements.txt
+    - tox.ini
+    - .coveragerc
   pull_request:
     paths:
     - '**.py'
-    - 'requirements.txt'
-    - 'tox.ini'
-    - 'coveragerc'
+    - requirements.txt
+    - tox.ini
+    - .coveragerc
 
 env:
   PY_COLORS: 1
