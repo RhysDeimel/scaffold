@@ -5,3 +5,5 @@
 # them as demonstrated in the unused example below
 
 from scaffold import foo
+
+print(foo.generate_memes())
