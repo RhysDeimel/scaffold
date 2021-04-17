@@ -1,10 +1,6 @@
 name: lint
 
 on:
-  push:
-    paths:
-    - '**.py'
-    - tox.ini
   pull_request:
     paths:
     - '**.py'
