@@ -5,8 +5,8 @@ on:
     paths:
     - '**.py'
     - requirements.txt
-    - ../../tox.ini
-    - .coveragerc
+    - pyproject.toml
+    - tox.ini
   push:
     branches:
       - master
@@ -19,33 +19,22 @@ env:
 jobs:
   build:
 
-    runs-on: ubuntu-20.04
+    runs-on: latest
     strategy:
       matrix:
-        python: [3.8, 3.9]
+        python: ['3.11']
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Setup Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
-
-      - name: Cache pip
-        uses: actions/cache@v2
-        with:
-          # This path is specific to Ubuntu
-          path: ~/.cache/pip
-          # Look to see if there is a cache hit for the corresponding requirements file
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-            ${{ runner.os }}-
+          cache: 'pip'
 
       - name: Install requirements
         run: pip install -r requirements.txt
 
       - name: Run Tox
-        # Run tox.ini using the version of Python in `PATH`
-        run: tox.ini -e clean,py,report
+        run: tox
