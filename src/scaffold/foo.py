@@ -1,2 +1,2 @@
 def generate_memes():
-    return "Super dank meme"
+    return 'Super dank meme'

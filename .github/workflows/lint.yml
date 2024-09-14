@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
     - '**.py'
-    - tox.ini
+    - ../../tox.ini
 
 env:
   PY_COLORS: 1

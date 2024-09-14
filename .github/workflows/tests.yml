@@ -5,7 +5,7 @@ on:
     paths:
     - '**.py'
     - requirements.txt
-    - tox.ini
+    - ../../tox.ini
     - .coveragerc
   push:
     branches:
@@ -47,5 +47,5 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run Tox
-        # Run tox using the version of Python in `PATH`
-        run: tox -e clean,py,report
+        # Run tox.ini using the version of Python in `PATH`
+        run: tox.ini -e clean,py,report

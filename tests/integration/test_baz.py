@@ -6,7 +6,7 @@ from scaffold import baz
 @pytest.mark.incremental
 class TestIncremental:
     def test_herp(self):
-        assert baz.herp() != "Herp"
+        assert baz.herp() != 'Herp'
 
     def test_derp(self):
-        assert baz.herp() == "Derp"
+        assert baz.herp() == 'Derp'

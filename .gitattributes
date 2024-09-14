@@ -1,4 +1,5 @@
 # Basic .gitattributes for a python repo.
+# https://github.com/gitattributes/gitattributes/blob/master/Python.gitattributes
 
 # Source files
 # ============
@@ -16,12 +17,12 @@
 *.p      binary
 *.pkl    binary
 *.pickle binary
-*.pyc    binary
+*.pyc    binary export-ignore
+*.pyo    binary export-ignore
 *.pyd    binary
-*.pyo    binary
 
 # Jupyter notebook
-*.ipynb  text
+*.ipynb  text eol=lf
 
 # Note: .db, .p, and .pkl files are associated
 # with the python modules ``pickle``, ``dbm.*``,

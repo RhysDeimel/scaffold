@@ -1,2 +1,2 @@
 def herp():
-    return "Derp"
+    return 'Derp'
