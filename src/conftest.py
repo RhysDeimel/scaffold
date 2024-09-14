@@ -1,2 +1,2 @@
-# this exists to pytest can be run without tox.ini. Without it, pytest doesn't know
-# the codebase resides here
+# This exists so pytest can run outside tox.
+# Without it, pytest doesn't know the codebase resides here
