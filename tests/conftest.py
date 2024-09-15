@@ -1,4 +1,3 @@
-
 import pytest
 
 # store history of failures per test class name and per index in parametrize (if parametrize used)
