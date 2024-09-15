@@ -18,6 +18,19 @@ description = "Template repo for python projects"
 readme =  "README.md"
 license = {text = "MIT License"}
 
+[project.optional-dependencies]
+test = [
+    "pytest",
+    "tox",
+]
+lint = [
+    "mypy",
+    "ruff",
+]
+dev = [
+    "scaffold[test,lint]",
+]
+
 
 [tool.coverage.html]
 directory = "htmlcov"
@@ -71,6 +84,18 @@ line-length = 100
 [tool.ruff.format]
 quote-style = "single"
 docstring-code-format = true
+
+[tool.ruff.lint]
+select = [
+    "E4",  # pycodestyle errors 4xx
+    "E7",  # pycodestyle errors 7xx
+    "E9",  # pycodestyle errors 9xx
+    "F",  # pyflakes
+    "I",  # isoert,
+    "N",  # pep8-naming
+    "RUF", # ruff-specific rules
+    "U",  # pyupgrade
+]
 
 
 [tool.setuptools.dynamic]

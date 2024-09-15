@@ -1,16 +1,18 @@
 # Scaffold
 Basic python tox, pytest, & coverage project structure
 
+
 ## Installation
 Simply clone, remove the `.git` folder (re-init if you like), and change any `scaffold` references to that of your
 project name. EZPZ
 
+
 ## Usage
-Slap your venv in the root dir, install the requirements, then run `pytest` or `tox` from the root dir to see the
+Slap your venv in the root dir, install the dev requirements with `pip install -e .[dev]`, then run `pytest` or `tox` from the root dir to see the
 results. Tox will run through any specified python versions you put in the `env_list`.
 For added bonus, I've thrown in coverage and markers for slow tests.
 
-Coverage will run everytime you run `tox`, and it will also populate the htmlcov folder with
+Coverage will run everytime you call `tox`, and it will also populate the htmlcov folder with
 [jazz](https://www.youtube.com/watch?v=xuPSIbABYVU) so you can see how lazy you've been with your test coverage.
 Feel free to check the `pyproject.toml` to see adjustable failure rates for coverage.
 Additionally, coverage is aggregated across all the specified python versions,
@@ -23,15 +25,14 @@ If you only care about running the tests (and noting else), you don't have to us
 To run the slow tests, you will have to use the marker: `pytest --runslow`. 
 
 > [!CAUTION]
-> Depending on how you're importing packages, running pytest outside tox might fail. To fix this, you will most likely
-> need to install your current project locally using: `pip install -e .`
+> Depending on how you're importing packages, running pytest outside tox might fail.
+> Relative vs absolute imports and all that nonsense.
 
 
 ## Directory Structure
 ```
 .
 ├── README.md
-├── requirements.txt  # anything required for dev. Intentionally unversioned
 ├── tox.ini
 ├── pyproject.toml  # project and tool settings
 ├── htmlcov
