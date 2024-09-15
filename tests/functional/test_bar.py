@@ -1,5 +1,6 @@
-from scaffold import bar
 import pytest
+
+from scaffold import bar
 
 
 @pytest.mark.slow

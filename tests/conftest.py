@@ -1,9 +1,7 @@
 import pytest
-from typing import Dict, Tuple
-
 
 # store history of failures per test class name and per index in parametrize (if parametrize used)
-_test_failed_incremental: Dict[str, Dict[Tuple[int, ...], str]] = {}
+_test_failed_incremental: dict[str, dict[tuple[int, ...], str]] = {}
 
 
 def pytest_addoption(parser):
