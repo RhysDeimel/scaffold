@@ -49,9 +49,9 @@ jobs:
     strategy:
       matrix:
         python: ['3.11']
-    env:
-      PY_COLORS: 1
-      FORCE_COLOR: 1
+    # env:
+    #   PY_COLORS: 1
+    #   FORCE_COLOR: 1
 
     steps:
       - uses: actions/checkout@v4
