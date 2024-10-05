@@ -31,8 +31,6 @@ jobs:
 
       - name: Check version
         run: |
-          ls -alh
-          
           # turns semver into a 7 digit int for comparison
           function semver_to_int { echo "$@" | awk -F. '{ printf("%d%03d%03d\n", $1,$2,$3); }'; }
 
