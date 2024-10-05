@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools >= 61.0"]
+requires = ["setuptools >= 74.1.2"]
 build-backend = "setuptools.build_meta"
 
 
@@ -20,12 +20,13 @@ license = {text = "MIT License"}
 
 [project.optional-dependencies]
 test = [
-    "pytest",
-    "tox",
+    "pytest==8.3.3",
+    "tox==4.21.2",
+    "coverage==7.6.1"
 ]
 lint = [
-    "mypy",
-    "ruff",
+    "mypy==1.11.2",
+    "ruff==0.6.9",
 ]
 dev = [
     "scaffold[test,lint]",
@@ -67,7 +68,8 @@ omit = [
 
 [tool.mypy]
 exclude = [
-    'venv/*'
+    'venv/*',
+    'build/*'
 ]
 
 
