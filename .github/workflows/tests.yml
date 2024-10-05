@@ -18,6 +18,8 @@ env:
 jobs:
   check_version:
     runs-on: ubuntu-latest
+    env:
+      VERSION_FILE_PATH: src/scaffold/__version__.py
 
     steps:
       - name: Checkout source
@@ -36,8 +38,8 @@ jobs:
           # turns semver into a 7 digit int for comparison
           function semver_to_int { echo "$@" | awk -F. '{ printf("%d%03d%03d\n", $1,$2,$3); }'; }
 
-          source_version=$(head "source/__version__.py" -n 1 | cut -d "'" -f 2)
-          destination_version=$(head "destination/__version__.py" -n 1 | cut -d "'" -f 2)
+          source_version=$(head "source/$VERSION_FILE_PATH" -n 1 | cut -d "'" -f 2)
+          destination_version=$(head "destination/$VERSION_FILE_PATH" -n 1 | cut -d "'" -f 2)
 
           if [ "$(semver_to_int "$destination_version")" -ge "$(semver_to_int "$source_version")" ]; then
               echo "Version needs incrementing: $destination_version >= $source_version"
