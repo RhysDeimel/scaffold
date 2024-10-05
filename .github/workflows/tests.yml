@@ -38,7 +38,9 @@ jobs:
           destination_version=$(head "destination/$VERSION_FILE_PATH" -n 1 | cut -d "'" -f 2)
 
           if [ "$(semver_to_int "$destination_version")" -ge "$(semver_to_int "$source_version")" ]; then
-              echo "Version needs incrementing: $destination_version >= $source_version"
+              echo "\e[31;1mError:\e[0m Version needs incrementing!"
+              echo "  Merge target is: $destination_version"
+              echo "  Current branch is: $source_version"
               exit 1
           fi
 
