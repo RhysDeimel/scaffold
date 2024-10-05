@@ -1,4 +1,4 @@
-name: run tests
+name: Run tests
 
 on:
   pull_request:
@@ -16,7 +16,36 @@ env:
 
 
 jobs:
-  build:
+  check_version:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          path: source
+
+      - name: Checkout destination
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.base_ref }}
+          path: 
+
+      - name: Check version
+        run: |
+          # turns semver into a 7 digit int for comparison
+          function semver_to_int { echo "$@" | awk -F. '{ printf("%d%03d%03d\n", $1,$2,$3); }'; }
+
+          source_version=$(head "source/${{ inputs.path }}" -n 1 | cut -d "'" -f 2)
+          destination_version=$(head "destination/${{ inputs.path }}" -n 1 | cut -d "'" -f 2)
+
+          if [ "$(semver_to_int "$destination_version")" -ge "$(semver_to_int "$source_version")" ]; then
+              echo "Version needs incrementing: $destination_version >= $source_version"
+              exit 1
+          fi
+
+
+  run_tests:
 
     runs-on: ubuntu-latest
     strategy:
