@@ -1,4 +1,4 @@
-name: run tests
+name: Run tests
 
 on:
   pull_request:
@@ -10,18 +10,49 @@ on:
     branches:
       - master
 
-env:
-  PY_COLORS: 1
-  FORCE_COLOR: 1
-
 
 jobs:
-  build:
+  check_version:
+    runs-on: ubuntu-latest
+    env:
+      VERSION_FILE_PATH: src/scaffold/__version__.py
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+        with:
+          path: source
+
+      - name: Checkout destination
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.base_ref }}
+          path: destination
+
+      - name: Check version
+        run: |
+          # Check semver by turning it into a 7 digit int for comparison
+          function semver_to_int { echo "$@" | awk -F. '{ printf("%d%03d%03d\n", $1,$2,$3); }'; }
+
+          source_version=$(head "source/$VERSION_FILE_PATH" -n 1 | cut -d "'" -f 2)
+          destination_version=$(head "destination/$VERSION_FILE_PATH" -n 1 | cut -d "'" -f 2)
+
+          if [ "$(semver_to_int "$destination_version")" -ge "$(semver_to_int "$source_version")" ]; then
+              echo -e "\e[31;1mError:\e[0m Version needs incrementing!"
+              echo "  Merge target is: $destination_version"
+              echo "  Current branch is: $source_version"
+              exit 1
+          fi
+
+
+  run_tests:
 
     runs-on: ubuntu-latest
     strategy:
       matrix:
         python: ['3.11']
+    env:
+      FORCE_COLOR: 1
 
     steps:
       - uses: actions/checkout@v4
