@@ -37,6 +37,11 @@ RUN mkdir dist/tmp
 
 
 FROM scratch AS run
+ARG CREATED
+ARG GIT_HASH
+ARG PACKAGE_VERSION
+ARG PY_VERSION
+
 COPY --from=build --chown=1001:1001 /app/dist/static_app /app
 COPY --from=build --chown=1001:1001 /app/dist/tmp /tmp
 
