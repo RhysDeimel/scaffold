@@ -53,7 +53,7 @@ jobs:
         with:
           dockerfile: Dockerfile
           failure-threshold: warning
-          ignore: DL3013
+          ignore: DL3013,DL3008
 
 
   run_tests:

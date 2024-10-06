@@ -30,7 +30,7 @@ WORKDIR /app
 COPY --from=dev --link /usr/local/lib/python${PY_VERSION}/site-packages/ /usr/local/lib/python${PY_VERSION}/site-packages/
 COPY --from=dev --link /app /app
 
-RUN apt-get update && apt-get install -y --no-install-recommends patchelf=0.14.3
+RUN apt-get update && apt-get install -y --no-install-recommends patchelf
 RUN pip install --no-cache-dir .[build]
 RUN pyinstaller -F --name app --clean src/scaffold/__main__.py
 RUN staticx dist/app dist/static_app
