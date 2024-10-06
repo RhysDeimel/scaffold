@@ -108,4 +108,4 @@ jobs:
           cache-to: type=gha,mode=max
           provenance: false
           push: true
-          tags:  ghcr.io/RhysDeimel/scaffold:${{ steps.args.outputs.PACKAGE_VERSION }}-${{ steps.args.outputs.BRANCH_SHA }}
+          tags:  ghcr.io/rhysdeimel/scaffold:${{ steps.args.outputs.PACKAGE_VERSION }}-${{ steps.args.outputs.BRANCH_SHA }}
