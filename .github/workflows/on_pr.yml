@@ -6,9 +6,7 @@ on:
     - '**.py'
     - pyproject.toml
     - tox.ini
-  push:
-    branches:
-      - master
+
 
 
 jobs:
@@ -46,7 +44,6 @@ jobs:
 
 
   run_tests:
-
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -68,3 +65,45 @@ jobs:
 
       - name: Run Tox
         run: tox
+
+
+  build:
+    needs: [check_version, run_tests]
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v3
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Calculate dynamic args
+        env:
+          BRANCH_NAME: ${{ github.head_ref }}
+        run: |
+          echo "BRANCH_SHA=$(echo -n "$BRANCH_NAME" | sha256sum | head -c 7)" >> "$GITHUB_ENV"
+          echo "CREATED=$(date --utc --rfc-3339=s)" >> "$GITHUB_ENV"
+          echo "PACKAGE_VERSION=$(head "src/scaffold/__version__.py" -n 1 | cut -d "'" -f 2)" >> "$GITHUB_ENV"
+      
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          build-args: |
+            CREATED=$CREATED
+            GIT_HASH="${GITHUB_SHA}"
+            PACKAGE_VERSION=$PACKAGE_VERSION
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          provenance: false
+          push: true
+          tags:  ghcr.io/televate-au/scaffold:$PACKAGE_VERSION-$BRANCH_SHA
