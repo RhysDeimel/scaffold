@@ -102,7 +102,7 @@ jobs:
         with:
           build-args: |
             CREATED=${{ steps.args.outputs.CREATED }}
-            GIT_HASH=${{ GITHUB_SHA }}
+            GIT_HASH=${{ github.sha }}
             PACKAGE_VERSION=${{ steps.args.outputs.PACKAGE_VERSION }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
