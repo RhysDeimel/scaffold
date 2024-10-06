@@ -44,6 +44,18 @@ jobs:
           fi
 
 
+  lint_dockerfile:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+          failure-threshold: warning
+          ignore: DL3013
+
+
   run_tests:
     runs-on: ubuntu-latest
     strategy:
@@ -69,7 +81,7 @@ jobs:
 
 
   build:
-    needs: [check_version, run_tests]
+    needs: [check_version, lint_dockerfile, run_tests]
     runs-on: ubuntu-latest
 
     steps:

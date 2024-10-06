@@ -15,7 +15,7 @@ ARG DEBIAN_RELEASE_NAME
 WORKDIR /app
 
 COPY . .
-RUN pip install --no-cache-dir .
+RUN pip install --no-cache-dir .[dev]
 
 EXPOSE 8080 
 CMD ["python", "-m", "scaffold"]
@@ -30,8 +30,8 @@ WORKDIR /app
 COPY --from=dev --link /usr/local/lib/python${PY_VERSION}/site-packages/ /usr/local/lib/python${PY_VERSION}/site-packages/
 COPY --from=dev --link /app /app
 
-RUN apt update && apt install patchelf
-RUN pip install --no-cache-dir pyinstaller staticx
+RUN apt-get update && apt-get install -y --no-install-recommends patchelf=0.14.3
+RUN pip install --no-cache-dir .[build]
 RUN pyinstaller -F --name app --clean src/scaffold/__main__.py
 RUN staticx dist/app dist/static_app
 RUN mkdir dist/tmp
@@ -73,5 +73,5 @@ LABEL org.opencontainers.image.vendor=""
 LABEL org.opencontainers.image.version="${PACKAGE_VERSION}"
 
 # Additional useful annotations
-LABEL python_version="${PY_VERSION}"
-LABEL build_base="${DEBIAN_RELEASE_NAME}"
+LABEL python.version="${PY_VERSION}"
+LABEL build.base="${DEBIAN_RELEASE_NAME}"
