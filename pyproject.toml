@@ -31,6 +31,10 @@ lint = [
 dev = [
     "scaffold[test,lint]",
 ]
+build = [
+    "pyinstaller==6.10.0",
+    "staticx==0.14.1",
+]
 
 
 [tool.coverage.html]
