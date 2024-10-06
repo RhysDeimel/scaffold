@@ -6,6 +6,7 @@ on:
     - '**.py'
     - pyproject.toml
     - tox.ini
+    - Dockerfile
 
 
 
