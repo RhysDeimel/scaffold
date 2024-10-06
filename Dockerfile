@@ -11,6 +11,7 @@ ARG PACKAGE_VERSION
 
 
 FROM python:${PY_VERSION}-slim-${DEBIAN_RELEASE_NAME} AS dev
+ARG DEBIAN_RELEASE_NAME
 WORKDIR /app
 
 COPY . .
@@ -22,6 +23,7 @@ CMD ["python", "-m", "scaffold"]
 
 
 FROM python:${PY_VERSION}-${DEBIAN_RELEASE_NAME} AS build
+ARG DEBIAN_RELEASE_NAME
 ARG PY_VERSION
 WORKDIR /app
 
@@ -38,6 +40,7 @@ RUN mkdir dist/tmp
 
 FROM scratch AS run
 ARG CREATED
+ARG DEBIAN_RELEASE_NAME
 ARG GIT_HASH
 ARG PACKAGE_VERSION
 ARG PY_VERSION
@@ -46,7 +49,6 @@ COPY --from=build --chown=1001:1001 /app/dist/static_app /app
 COPY --from=build --chown=1001:1001 /app/dist/tmp /tmp
 
 USER 1001
-EXPOSE 8080 
 ENTRYPOINT ["/app"]
 
 # PyInstaller does not bundle libc. Instead it expects to link dymamically to it.
