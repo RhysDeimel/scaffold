@@ -2,8 +2,8 @@
 # since lost the link to the post that helped me figure it out. Fight me.
 
 # If you're pulling in other modules within this folder, don't forget to import
-# them as demonstrated in the unused example below
+# them as demonstrated in the example below
 
 from scaffold import foo
 
-print(foo.generate_memes())
+foo.main()

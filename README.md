@@ -59,3 +59,10 @@ To run the slow tests, you will have to use the marker: `pytest --runslow`.
 │       └── test_foo.py
 └── venv        
 ```
+
+## Docs
+- doctests: https://docs.pytest.org/en/latest/how-to/doctest.html
+
+```
+mkdocs serve
+```
