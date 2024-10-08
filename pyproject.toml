@@ -84,6 +84,12 @@ exclude = [
     'build/*'
 ]
 
+[[tool.mypy.overrides]]
+# module is untyped
+module = [
+    "docker.*",
+]
+disable_error_code = "import-untyped"
 
 [tool.pytest.ini_options]
 addopts = "--doctest-modules"
