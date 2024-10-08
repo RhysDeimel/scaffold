@@ -1,0 +1,13 @@
+Daniele
+EZPZ
+MkDocs
+Procida
+dev
+dir
+docstrings
+htmlcov
+init
+mkdocstrings
+pytest
+tox
+venv

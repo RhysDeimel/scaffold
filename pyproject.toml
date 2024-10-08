@@ -7,7 +7,9 @@ build-backend = "setuptools.build_meta"
 name = "scaffold"
 requires-python = ">=3.11"
 dynamic = ["version"]
-dependencies = []
+dependencies = [
+    "redis==5.1.1",
+]
 authors = [
     {name = "Rhys Deimel", email = "deimelr@hotmail.com"},
 ]
@@ -20,16 +22,22 @@ license = {text = "MIT License"}
 
 [project.optional-dependencies]
 test = [
+    "coverage==7.6.1",
+    "docker==7.1.0",
+    "pyspelling==2.10",
     "pytest==8.3.3",
     "tox==4.21.2",
-    "coverage==7.6.1"
 ]
 lint = [
     "mypy==1.11.2",
     "ruff==0.6.9",
+    "types-redis==4.6.0.20241004"
 ]
 dev = [
     "scaffold[test,lint]",
+    "mkdocs==1.6.1",
+    "mkdocs-material==9.5.39",
+    "mkdocstrings-python==1.11.1"
 ]
 build = [
     "pyinstaller==6.10.0",
@@ -76,8 +84,15 @@ exclude = [
     'build/*'
 ]
 
+[[tool.mypy.overrides]]
+# module is untyped
+module = [
+    "docker",
+]
+ignore_missing_imports = true
 
 [tool.pytest.ini_options]
+addopts = "--doctest-modules"
 markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
     "incremental",
@@ -106,3 +121,50 @@ select = [
 
 [tool.setuptools.dynamic]
 version = {attr = "scaffold.__version__"}
+
+
+[tool.tox]
+requires = ["tox>=4"]
+env_list = ["clean", "lint", "type", "3.11", "report"]
+
+[tool.tox.env_run_base]
+description = "Run test under {base_python}"
+# default minimum python version for the whole project
+base_python = ["python3.11"]
+deps = [
+    "coverage==7.6.1",
+    "docker==7.1.0",
+    "pytest==8.3.3",
+    "tox==4.21.2",
+    "mypy==1.11.2",
+    "ruff==0.6.9",
+    "types-redis==4.6.0.20241004",
+]
+commands = [["coverage", "run", "-a", "-m", "pytest", "{posargs:--runslow}"]]
+
+[tool.tox.env.clean]
+description = "Remove previous coverage reports"
+skip_install = true
+commands = [["coverage", "erase"]]
+
+[tool.tox.env.lint]
+description = "Run linters"
+skip_install = true
+commands = [
+    ["ruff", "format", "--check"],
+    ["ruff", "check"],
+]
+
+[tool.tox.env.type]
+description = "Run type checks"
+skip_install = true
+commands = [["mypy", "."]]
+
+[tool.tox.env.report]
+description = "Generate coverage report"
+skip_install = true
+commands =[
+    ["coverage", "html", "--fail-under=0"],
+    ["coverage", "report"],
+]
+
