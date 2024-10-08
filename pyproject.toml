@@ -24,6 +24,7 @@ license = {text = "MIT License"}
 test = [
     "coverage==7.6.1",
     "docker==7.1.0",
+    "pyspelling==2.10",
     "pytest==8.3.3",
     "tox==4.21.2",
 ]

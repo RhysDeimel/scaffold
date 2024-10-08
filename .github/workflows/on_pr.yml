@@ -44,6 +44,14 @@ jobs:
           fi
 
 
+  spellcheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Spellcheck
+        uses: rojopolis/spellcheck-github-actions@0.42.0
+
+
   lint_dockerfile:
     runs-on: ubuntu-latest
 
@@ -78,6 +86,9 @@ jobs:
 
       - name: Run Tox
         run: tox
+
+      - name: Test docs generation
+        run: mkdocs build --clean
 
 
   build:
