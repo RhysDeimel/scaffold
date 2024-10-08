@@ -55,6 +55,8 @@ mkdocs serve
 ## Directory Structure
 ```
 .
+├── .pyspelling.yml  # spellcheck config
+├── .wordlist.txt  # whitelist for spellcheck
 ├── Dockerfile
 ├── mkdocs.yml  # docs configuration
 ├── pyproject.toml  # project and tool settings
