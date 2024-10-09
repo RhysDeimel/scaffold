@@ -6,6 +6,7 @@ on:
     - '**.md'
     - .pyspelling.yml
     - .wordlist.txt
+    - mkdocs.yml
     - pyproject.toml
 
 jobs:
