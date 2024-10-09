@@ -1,4 +1,5 @@
 site_name: Scaffold Docs
+site_url: https://scaffold.ragedriven.dev/
 repo_url: https://github.com/RhysDeimel/scaffold
 repo_name: RhysDeimel/scaffold
 
@@ -8,6 +9,11 @@ theme:
 plugins:
   - mkdocstrings
   - search
+
+extra:
+  version:
+    provider: mike
+
 
 nav:
   - Scaffold Docs: index.md
