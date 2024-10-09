@@ -9,6 +9,11 @@ on:
     - mkdocs.yml
     - pyproject.toml
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+
 jobs:
   spellcheck:
     runs-on: ubuntu-latest
