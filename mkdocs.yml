@@ -7,6 +7,7 @@ theme:
 
 plugins:
   - mkdocstrings
+  - search
 
 nav:
   - Scaffold Docs: index.md
