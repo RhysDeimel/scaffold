@@ -51,6 +51,30 @@ To see what docs are generated on your local, install the project, and then run 
 mkdocs serve
 ```
 
+### Versions
+This documentation is versioned using [mike](https://github.com/jimporter/mike). 
+It is a utility integrated into mkdocs-material that makes it easy to deploy multiple versions of documentation.
+It does so by pushing documentation to a branch (`gh-pages`) to a versioned folder,
+and switches between these folders based on a dropdown option selected on the main documentation page.
+
+As per the project:
+> mike is built around the idea that once you've generated your docs for a particular version,
+> you should never need to touch that version again. 
+> This means you never have to worry about breaking changes in MkDocs,
+> since your old docs (built with an old version of MkDocs) are already generated and sitting in your gh-pages branch.
+> 
+> While mike is flexible, it's optimised around putting your docs in a <major>.<minor> directory, 
+> with optional aliases (e.g. latest or dev) to particularly notable versions. 
+> This makes it easy to make permalinks to whatever version of the documentation you want to direct people to.
+
+This can make viewing the documentation of past versions a little tricky. 
+However, I believe the trade-off is worth it. 
+I considered deploying WIP docs for changes in a branch, 
+but there were too many potential edge cases around cleanup that made the idea unpalatable. 
+
+Documentation deployments are fully automatic via GitHub workflows.
+The only config you might need to do would be to navigate to the repository settings,
+select `Pages`, change the branch to `gh-pages`, and add any custom domains and HTTPS settings. 
 
 ## Directory Structure
 ```
