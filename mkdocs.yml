@@ -1,4 +1,6 @@
 site_name: Scaffold Docs
+repo_url: https://github.com/RhysDeimel/scaffold
+repo_name: RhysDeimel/scaffold
 
 theme:
   name: "material"
