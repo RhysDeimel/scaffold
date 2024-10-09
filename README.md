@@ -54,7 +54,8 @@ mkdocs serve
 ### Versions
 This documentation is versioned using [mike](https://github.com/jimporter/mike). 
 It is a utility integrated into mkdocs-material that makes it easy to deploy multiple versions of documentation.
-It does so by pushing documentation to a branch (`gh-pages`), and tracking versions based on published commits.
+It does so by pushing documentation to a branch (`gh-pages`) to a versioned folder,
+and switches between these folders based on a dropdown option selected on the main documentation page.
 
 As per the project:
 > mike is built around the idea that once you've generated your docs for a particular version,

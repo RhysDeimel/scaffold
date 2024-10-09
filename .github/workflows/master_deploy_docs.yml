@@ -27,7 +27,8 @@ jobs:
       - name: Install requirements
         run: pip install -e .[dev]
 
-      - run: |
+      - name: Deploy docs to branch
+        run: |
           VERSION_NO_PATCH=$(head "src/scaffold/__version__.py" -n 1 | cut -d "'" -f 2 | cut -d "." -f -2)
           mike set-default latest --allow-undefined
           mike deploy --push --update-aliases "$VERSION_NO_PATCH" latest
