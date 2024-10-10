@@ -81,6 +81,9 @@ jobs:
       - name: Run Tox
         run: tox
 
+      - name: Test docs generation
+        run: mkdocs build --clean
+
 
   build:
     needs: [check_version, lint_dockerfile, run_tests]
