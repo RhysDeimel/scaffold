@@ -22,7 +22,7 @@ license = {text = "MIT License"}
 
 [project.optional-dependencies]
 test = [
-    "coverage==7.6.1",
+    "coverage==7.6.4",
     "docker==7.1.0",
     "pyspelling==2.10",
     "pytest==8.3.3",
@@ -135,7 +135,7 @@ description = "Run test under {base_python}"
 # default minimum python version for the whole project
 base_python = ["python3.11"]
 deps = [
-    "coverage==7.6.1",
+    "coverage==7.6.4",
     "docker==7.1.0",
     "pytest==8.3.3",
     "tox==4.21.2",
