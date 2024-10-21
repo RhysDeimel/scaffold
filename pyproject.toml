@@ -43,7 +43,7 @@ dev = [
     "scaffold[test,lint,docs]",
 ]
 build = [
-    "pyinstaller==6.10.0",
+    "pyinstaller==6.11.0",
     "staticx==0.14.1",
 ]
 
