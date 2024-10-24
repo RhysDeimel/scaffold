@@ -1,6 +1,6 @@
 ---
 name: Blank issue template
-about: Describe this issue template's purpose here.
+about: For any issue that doesn't match an existing template
 title: ''
 labels: ''
 assignees: ''
