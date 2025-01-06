@@ -8,7 +8,7 @@ name = "scaffold"
 requires-python = ">=3.11"
 dynamic = ["version"]
 dependencies = [
-    "redis==5.2.0",
+    "redis==5.2.1",
 ]
 authors = [
     {name = "Rhys Deimel", email = "deimelr@hotmail.com"},
@@ -22,28 +22,28 @@ license = {text = "MIT License"}
 
 [project.optional-dependencies]
 test = [
-    "coverage==7.6.4",
+    "coverage==7.6.10",
     "docker==7.1.0",
     "pyspelling==2.10",
-    "pytest==8.3.3",
+    "pytest==8.3.4",
     "tox==4.23.2",
 ]
 lint = [
-    "mypy==1.13.0",
-    "ruff==0.7.2",
+    "mypy==1.14.1",
+    "ruff==0.8.6",
     "types-redis==4.6.0.20241004"
 ]
 docs = [
     "mike==2.1.3",
-    "mkdocs-material==9.5.43",
+    "mkdocs-material==9.5.49",
     "mkdocs==1.6.1",
-    "mkdocstrings-python==1.12.2",
+    "mkdocstrings-python==1.13.0",
 ]
 dev = [
     "scaffold[test,lint,docs]",
 ]
 build = [
-    "pyinstaller==6.11.0",
+    "pyinstaller==6.11.1",
     "staticx==0.14.1",
 ]
 
@@ -135,12 +135,12 @@ description = "Run test under {base_python}"
 # default minimum python version for the whole project
 base_python = ["python3.11"]
 deps = [
-    "coverage==7.6.4",
+    "coverage==7.6.10",
     "docker==7.1.0",
-    "pytest==8.3.3",
+    "pytest==8.3.4",
     "tox==4.23.2",
-    "mypy==1.13.0",
-    "ruff==0.7.2",
+    "mypy==1.14.1",
+    "ruff==0.8.6",
     "types-redis==4.6.0.20241004",
 ]
 commands = [["coverage", "run", "-a", "-m", "pytest", "{posargs:--runslow}"]]
