@@ -504,12 +504,12 @@ reference for the technical implementation of the
 
 
 <p><span class="doc-section-title">Examples:</span></p>
-    <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scaffold</span> <span class="kn">import</span> <span class="n">calculator</span>
+    <div class="highlight"><pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">scaffold</span><span class="w"> </span><span class="kn">import</span> <span class="n">calculator</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">calculator</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 <span class="go">6.0</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">calculator</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">)</span>
 <span class="go">8.0</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">scaffold.calculator</span> <span class="kn">import</span> <span class="n">divide</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span><span class="w"> </span><span class="nn">scaffold.calculator</span><span class="w"> </span><span class="kn">import</span> <span class="n">divide</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">divide</span><span class="p">(</span><span class="mf">4.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="go">2.0</span>
 </code></pre></div>
@@ -576,7 +576,7 @@ reference for the technical implementation of the
                 <code>a</code>
             </td>
             <td>
-                  <code>float | int</code>
+                  <code><span title="float">float</span> | <span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -592,7 +592,7 @@ reference for the technical implementation of the
                 <code>b</code>
             </td>
             <td>
-                  <code>float | int</code>
+                  <code><span title="float">float</span> | <span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -618,7 +618,7 @@ reference for the technical implementation of the
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code>float</code>
+                  <code><span title="float">float</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -647,7 +647,7 @@ reference for the technical implementation of the
 <span class="normal">39</span>
 <span class="normal">40</span>
 <span class="normal">41</span>
-<span class="normal">42</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">42</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute and return the sum of two numbers.</span>
 
 <span class="sd">    Examples:</span>
@@ -712,7 +712,7 @@ reference for the technical implementation of the
                 <code>a</code>
             </td>
             <td>
-                  <code>float | int</code>
+                  <code><span title="float">float</span> | <span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -728,7 +728,7 @@ reference for the technical implementation of the
                 <code>b</code>
             </td>
             <td>
-                  <code>float | int</code>
+                  <code><span title="float">float</span> | <span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -754,7 +754,7 @@ reference for the technical implementation of the
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code>float</code>
+                  <code><span title="float">float</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -777,7 +777,7 @@ reference for the technical implementation of the
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code>ZeroDivisionError</code>
+                  <code><span title="ZeroDivisionError">ZeroDivisionError</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -815,7 +815,7 @@ reference for the technical implementation of the
 <span class="normal">105</span>
 <span class="normal">106</span>
 <span class="normal">107</span>
-<span class="normal">108</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">divide</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">108</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">divide</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute and return the quotient of two numbers.</span>
 
 <span class="sd">    Examples:</span>
@@ -885,7 +885,7 @@ reference for the technical implementation of the
                 <code>a</code>
             </td>
             <td>
-                  <code>float | int</code>
+                  <code><span title="float">float</span> | <span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -901,7 +901,7 @@ reference for the technical implementation of the
                 <code>b</code>
             </td>
             <td>
-                  <code>float | int</code>
+                  <code><span title="float">float</span> | <span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -927,7 +927,7 @@ reference for the technical implementation of the
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code>float</code>
+                  <code><span title="float">float</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -956,7 +956,7 @@ reference for the technical implementation of the
 <span class="normal">77</span>
 <span class="normal">78</span>
 <span class="normal">79</span>
-<span class="normal">80</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">80</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute and return the product of two numbers.</span>
 
 <span class="sd">    Examples:</span>
@@ -1017,7 +1017,7 @@ reference for the technical implementation of the
                 <code>a</code>
             </td>
             <td>
-                  <code>float | int</code>
+                  <code><span title="float">float</span> | <span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1033,7 +1033,7 @@ reference for the technical implementation of the
                 <code>b</code>
             </td>
             <td>
-                  <code>float | int</code>
+                  <code><span title="float">float</span> | <span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1059,7 +1059,7 @@ reference for the technical implementation of the
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code>float</code>
+                  <code><span title="float">float</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1088,7 +1088,7 @@ reference for the technical implementation of the
 <span class="normal">58</span>
 <span class="normal">59</span>
 <span class="normal">60</span>
-<span class="normal">61</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">subtract</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<span class="normal">61</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">subtract</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the difference of two numbers.</span>
 
 <span class="sd">    Examples:</span>
