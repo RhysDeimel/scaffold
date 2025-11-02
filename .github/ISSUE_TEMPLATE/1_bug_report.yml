@@ -1,7 +1,9 @@
 name: Bug report  🐞
 description: Create a report to help us improve
-labels: ["triage"]
-type: bug
+labels: ["triage", "bug"]
+## Type is only available with paid plans
+# labels: ["triage"]
+# type: bug
 
 body:
 - type: textarea
