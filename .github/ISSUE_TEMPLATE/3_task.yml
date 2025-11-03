@@ -1,7 +1,9 @@
 name: Task  🛠️
 description: A unit of work that needs doing
-labels: ["triage"]
-type: task
+labels: ["triage", "task"]
+## Type is only available with paid plans
+# labels: ["triage"]
+# type: task
 
 body:
 - type: textarea

@@ -1,7 +1,9 @@
 name: Feature Request  💡
 description: Suggest a new feature, enhancement, or idea
-labels: ["triage"]
-type: feature
+labels: ["triage", "feature"]
+## Type is only available with paid plans
+# labels: ["triage"]
+# type: feature
 
 body:
 - type: textarea
