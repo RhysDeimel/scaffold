@@ -1,5 +1,3 @@
-# scaffold/calculator.py
-
 """Provide several sample math calculations.
 
 This module allows the user to make mathematical calculations.
@@ -91,7 +89,7 @@ def divide(a: float | int, b: float | int) -> float:
         >>> divide(4, 0)
         Traceback (most recent call last):
         ...
-        ZeroDivisionError: division by zero
+        ZeroDivisionError
 
     Args:
         a: A number representing the dividend in the division.
@@ -104,5 +102,5 @@ def divide(a: float | int, b: float | int) -> float:
         ZeroDivisionError: An error occurs when the divisor is `0`.
     """
     if b == 0:
-        raise ZeroDivisionError('division by zero')
+        raise ZeroDivisionError
     return float(a / b)
