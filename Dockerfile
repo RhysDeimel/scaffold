@@ -15,7 +15,7 @@ ARG DEBIAN_RELEASE_NAME
 WORKDIR /app
 
 COPY . .
-RUN pip install --no-cache-dir .[dev]
+RUN pip install --no-cache-dir . --group dev
 
 EXPOSE 8080 
 CMD ["python", "-m", "scaffold"]
@@ -31,7 +31,7 @@ COPY --from=dev --link /usr/local/lib/python${PY_VERSION}/site-packages/ /usr/lo
 COPY --from=dev --link /app /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends patchelf
-RUN pip install --no-cache-dir .[build]
+RUN pip install --no-cache-dir . --group build
 RUN pyinstaller -F --name app --clean src/scaffold/__main__.py
 RUN staticx dist/app dist/static_app
 RUN mkdir dist/tmp
