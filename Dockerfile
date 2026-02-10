@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1
 
-ARG PY_VERSION="3.11"
+ARG PY_VERSION="3.13"
 ARG DEBIAN_RELEASE_NAME="bookworm"
 
 ARG CREATED
