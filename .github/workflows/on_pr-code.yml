@@ -62,7 +62,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ['3.11']
+        python: ['3.13']
     env:
       FORCE_COLOR: 1
 
@@ -76,7 +76,7 @@ jobs:
           cache: 'pip'
 
       - name: Install requirements
-        run: pip install -e .[dev]
+        run: pip install . --group dev
 
       - name: Run Tox
         run: tox
