@@ -1,4 +1,5 @@
 import pytest
+from dotenv import find_dotenv, load_dotenv
 
 # store history of failures per test class name and per index in parametrize (if parametrize used)
 _test_failed_incremental: dict[str, dict[tuple[int, ...], str]] = {}
@@ -10,6 +11,12 @@ def pytest_addoption(parser):
 
 def pytest_configure(config):
     config.addinivalue_line('markers', 'slow: mark test as slow to run')
+
+
+def pytest_sessionstart(session):
+    secret_env_file = find_dotenv('.env.secrets')
+    load_dotenv()  # load the default .env
+    load_dotenv(secret_env_file)
 
 
 def pytest_collection_modifyitems(config, items):

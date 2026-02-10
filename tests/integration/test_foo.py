@@ -30,15 +30,16 @@ def redis_container():
             time.sleep(pause)
             now = clock()
 
-        raise Exception('Timeout reached while waiting on service!')
+        raise Exception('Timeout reached while waiting on service!')  # noqa: TRY002, TRY003
 
     def is_responsive():
         try:
             r = redis.Redis(host='localhost', port=6379, db=0)
             r.info()
-            return True
         except redis.exceptions.ConnectionError:
             return False
+        else:
+            return True
 
     client = docker.from_env()
     container = client.containers.run('redis', detach=True, ports={6379: 6379}, remove=True)

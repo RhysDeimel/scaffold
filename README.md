@@ -8,7 +8,7 @@ project name. EZPZ
 
 
 ## Usage
-Slap your venv in the root dir, install the dev requirements with `pip install -e .[dev]`, 
+Slap your venv in the root dir, install the dev requirements with `pip install -e . --group dev`,
 then run `pytest` or `tox` from the root dir to see the results. 
 Tox will run through any specified python versions you put in the `env_list` 
 in the relevant tox settings in `pyproject.toml`. 
