@@ -49,6 +49,10 @@ dev = [
     {include-group = "types"},
     {include-group = "docs"},
 ]
+build = [
+    "pyinstaller~=6.18",
+    "staticx~=0.14",
+]
 
 
 [tool.coverage.html]
