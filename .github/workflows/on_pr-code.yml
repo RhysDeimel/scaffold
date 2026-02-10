@@ -79,7 +79,7 @@ jobs:
         run: pip install . --group dev
 
       - name: Run Tox
-        run: tox
+        run: tox run-parallel -o
 
       - name: Test docs generation
         run: mkdocs build --clean
