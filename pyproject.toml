@@ -1,14 +1,14 @@
 [build-system]
-requires = ["setuptools >= 74.1.2"]
+requires = ["setuptools>=80"]
 build-backend = "setuptools.build_meta"
 
 
 [project]
 name = "scaffold"
-requires-python = ">=3.11"
-dynamic = ["version"]
+requires-python = ">=3.13"
+dynamic = ["readme", "version"]
 dependencies = [
-    "redis==7.0.1",
+    "redis==7.1.1",
 ]
 authors = [
     {name = "Rhys Deimel", email = "deimelr@hotmail.com"},
@@ -17,34 +17,37 @@ maintainers = [
     {name = "Rhys Deimel", email = "deimelr@hotmail.com"},
 ]
 description = "Template repo for python projects"
-readme =  "README.md"
 license = {text = "MIT License"}
 
-[project.optional-dependencies]
+[dependency-groups]
 test = [
-    "coverage==7.11.0",
-    "docker==7.1.0",
-    "pyspelling==2.12",
-    "pytest==8.4.2",
-    "tox==4.32.0",
+    "docker~=7.1",
+    "pytest-asyncio~=1.3",
+    "pytest-cov~=7.0",
+    "pytest-dotenv~=0.5",
+    "pytest-xdist~=3.8",
+    "pytest~=9.0",
+    "tox~=4.34",
 ]
 lint = [
-    "mypy==1.18.2",
-    "ruff==0.14.3",
+    "mypy==1.19.1",  # hard pin to type complaints between versions
+    "ruff==0.15.0",  # hard pin to avoid formatting changes between versions
+]
+types = [
     "types-redis==4.6.0.20241004"
 ]
 docs = [
-    "mike==2.1.3",
-    "mkdocs-material==9.6.23",
-    "mkdocs==1.6.1",
-    "mkdocstrings-python==1.18.2",
+    "mike~=2.1",
+    "mkdocs-material~=9.7",
+    "mkdocs~=1.6",
+    "mkdocstrings-python~=2.0",
+    "pyspelling~=2.12",
 ]
 dev = [
-    "scaffold[test,lint,docs]",
-]
-build = [
-    "pyinstaller==6.16.0",
-    "staticx==0.14.1",
+    {include-group = "test"},
+    {include-group = "lint"},
+    {include-group = "types"},
+    {include-group = "docs"},
 ]
 
 
@@ -71,7 +74,6 @@ exclude_also = [
 ]
 fail_under = 95
 ignore_errors = true
-skip_covered = true
 skip_empty = true
 
 [tool.coverage.run]
@@ -81,10 +83,32 @@ omit = [
 ]
 
 
+[tool.licensecheck]
+ignore_packages = [
+    "certifi",   # Mozilla Public License 2.0 is weak copyleft
+]
+fail_licenses = [
+    "AGPL v1",
+    "AGPL v3",
+    "AGPL",
+    "GPL v2",
+    "GPL v2.1",
+    "GPL v3",
+    "GPL",
+    "LGPL v2",
+    "LGPL v2.1",
+    "LGPL v3",
+    "LGPL",
+]
+show_only_failing = true   # This config doesn't work because of a bug: https://github.com/FHPythonUtils/LicenseCheck/issues/127
+zero = true
+
+
 [tool.mypy]
 exclude = [
+    'build/*',
+    'tests/*',
     'venv/*',
-    'build/*'
 ]
 
 [[tool.mypy.overrides]]
@@ -92,13 +116,25 @@ exclude = [
 module = [
     "docker",
 ]
-ignore_missing_imports = true
+follow_untyped_imports = true
+
 
 [tool.pytest.ini_options]
-addopts = "--doctest-modules"
+addopts = "--doctest-modules --import-mode=importlib --cov . --cov-report html"
+anyio_mode = "auto"
 markers = [
-    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "slow: marks tests as slow (deselect with 'a-m \"not slow\"')",
+    "live: mark test as requiring credentials, API keys, or internet services",
     "incremental",
+]
+norecursedirs=[
+    '*.egg',
+    '.*',
+    '.venv',
+    'build',
+    'dist',
+    'tmp',
+    'venv',
 ]
 
 
@@ -106,52 +142,68 @@ markers = [
 line-length = 100
 
 [tool.ruff.format]
-quote-style = "single"
 docstring-code-format = true
+preview = true
+quote-style = "single"
 
 [tool.ruff.lint]
 select = [
+    "B",  # flake8-bugbear
+    "C90",  # mccabe
     "E4",  # pycodestyle errors 4xx
     "E7",  # pycodestyle errors 7xx
     "E9",  # pycodestyle errors 9xx
     "F",  # pyflakes
+    "FURB",  # refurb,
     "I",  # isoert,
     "N",  # pep8-naming
+    "PT",  # flake8-pytest-style
     "RUF", # ruff-specific rules
-    "U",  # pyupgrade
+    "TRY", # tryceratops
+    "UP",  # pyupgrade
 ]
 
 
 [tool.setuptools.dynamic]
 version = {attr = "scaffold.__version__"}
+readme = {file = ["README.md"], content-type = "text/markdown"}
 
 
 [tool.tox]
 requires = ["tox>=4"]
-env_list = ["clean", "lint", "type", "3.11", "report"]
+env_list = [
+    "licensecheck",
+    "lint",
+    "type",
+    "3.13",
+]
 
 [tool.tox.env_run_base]
 description = "Run test under {base_python}"
-# default minimum python version for the whole project
-base_python = ["python3.11"]
-deps = [
-    "coverage==7.11.0",
-    "docker==7.1.0",
-    "pytest==8.4.2",
-    "tox==4.32.0",
-    "mypy==1.18.2",
-    "ruff==0.14.3",
-    "types-redis==4.6.0.20241004",
+dependency_groups = ["test"]
+deps = []
+pass_env = []
+commands = [
+    ["pytest", "-n", "auto", "--dist", "loadgroup", "{posargs:--failed-first}", "{posargs:--runslow}"]
 ]
-commands = [["coverage", "run", "-a", "-m", "pytest", "{posargs:--runslow}"]]
 
-[tool.tox.env.clean]
-description = "Remove previous coverage reports"
+[tool.tox.env.licensecheck]
+description = "Check for license infringements"
+deps = ["licensecheck==2025.1.0"]
+dependency_groups = []
 skip_install = true
-commands = [["coverage", "erase"]]
+# unset FORCE_COLOR because it's causing a parsing error in the
+#  requirements library because of the ANSI escape sequences
+setenv = { FORCE_COLOR = "" }
+# TODO - remove the flag when they fix the config bug
+commands = [
+    ["licensecheck", "--show-only-failing", "--requirements-paths", "./pyproject.toml"]
+]
+
 
 [tool.tox.env.lint]
 description = "Run linters"
+dependency_groups = ["lint"]
 skip_install = true
 commands = [
     ["ruff", "format", "--check"],
@@ -160,14 +212,5 @@ commands = [
 
 [tool.tox.env.type]
 description = "Run type checks"
-skip_install = true
+dependency_groups = ["lint", "types"]
 commands = [["mypy", "."]]
-
-[tool.tox.env.report]
-description = "Generate coverage report"
-skip_install = true
-commands =[
-    ["coverage", "html", "--fail-under=0"],
-    ["coverage", "report"],
-]
-
