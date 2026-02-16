@@ -31,7 +31,7 @@ test = [
 ]
 lint = [
     "mypy==1.19.1",  # hard pin to type complaints between versions
-    "ruff==0.15.0",  # hard pin to avoid formatting changes between versions
+    "ruff==0.15.1",  # hard pin to avoid formatting changes between versions
 ]
 types = [
     "types-redis==4.6.0.20241004"
