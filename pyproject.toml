@@ -8,7 +8,7 @@ name = "scaffold"
 requires-python = ">=3.13"
 dynamic = ["readme", "version"]
 dependencies = [
-    "redis==7.1.1",
+    "redis==7.4.0",
 ]
 authors = [
     {name = "Rhys Deimel", email = "deimelr@hotmail.com"},
@@ -30,8 +30,8 @@ test = [
     "tox~=4.34",
 ]
 lint = [
-    "mypy==1.19.1",  # hard pin to type complaints between versions
-    "ruff==0.15.0",  # hard pin to avoid formatting changes between versions
+    "mypy==1.20.0",  # hard pin to type complaints between versions
+    "ruff==0.15.9",  # hard pin to avoid formatting changes between versions
 ]
 types = [
     "types-redis==4.6.0.20241004"
