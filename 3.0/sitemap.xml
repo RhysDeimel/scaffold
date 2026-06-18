@@ -3,21 +3,26 @@
     <url>
          <loc>https://scaffold.ragedriven.dev/3.0/</loc>
          <lastmod>2026-06-18</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://scaffold.ragedriven.dev/3.0/explanation/</loc>
          <lastmod>2026-06-18</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://scaffold.ragedriven.dev/3.0/how-to-guides/</loc>
          <lastmod>2026-06-18</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://scaffold.ragedriven.dev/3.0/reference/</loc>
          <lastmod>2026-06-18</lastmod>
+         <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://scaffold.ragedriven.dev/3.0/tutorials/</loc>
          <lastmod>2026-06-18</lastmod>
+         <changefreq>daily</changefreq>
     </url>
 </urlset>
