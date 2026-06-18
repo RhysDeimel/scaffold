@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=80"]
+requires = ["setuptools>=82.0.1"]
 build-backend = "setuptools.build_meta"
 
 
@@ -21,27 +21,27 @@ license = "MIT"
 
 [dependency-groups]
 test = [
-    "docker <=7.1, ==7.*",
-    "python-dotenv <=1.1, ==1.*",
-    "pytest-asyncio <=1.3, ==1.*",
-    "pytest-cov <=7.0, ==7.*",
-    "pytest-xdist <=3.8, ==3.*",
-    "pytest <=9.0, ==9.*",
-    "tox <=4.34, ==4.*",
+    "docker ==7.*",
+    "python-dotenv ==1.*",
+    "pytest-asyncio ==1.*",
+    "pytest-cov ==7.*",
+    "pytest-xdist ==3.*",
+    "pytest ==9.*",
+    "tox ==4.*",
 ]
 lint = [
-    "mypy==1.19.1",  # hard pin to type complaints between versions
-    "ruff==0.15.0",  # hard pin to avoid formatting changes between versions
+    "mypy==2.1.0",  # hard pin to type complaints between versions
+    "ruff==0.15.13",  # hard pin to avoid formatting changes between versions
 ]
 types = [
     "types-redis==4.6.0.20241004"
 ]
 docs = [
-    "mike <=2.1, ==2.*",
-    "mkdocs-material <=9.7, ==9.*",
-    "mkdocs <=1.6, ==1.*",
-    "mkdocstrings-python <=2.0, ==2.*",
-    "pyspelling <=2.12, ==2.*",
+    "mike ==2.*",
+    "mkdocs-material ==9.*",
+    "mkdocs ==1.*",
+    "mkdocstrings-python ==2.*",
+    "pyspelling ==2.*",
 ]
 dev = [
     {include-group = "test"},
