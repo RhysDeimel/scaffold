@@ -2,8 +2,8 @@ name: Deploy Docs
 
 on:
   push:
-    branches:
-      - master
+    tags:
+      - 'v*'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -18,6 +18,17 @@ jobs:
 
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Verify tag is on master
+        run: |
+          git fetch origin master
+          git merge-base --is-ancestor "$GITHUB_SHA" origin/master || {
+            echo "::error::Tag is not on master — skipping docs deploy"
+            exit 1
+          }
+
       - name: Configure Git Credentials
         run: |
           git config user.name github-actions[bot]
@@ -31,8 +42,10 @@ jobs:
         run: pip install . --group docs
 
       - name: Deploy docs to branch
+        env:
+          TAG: ${{ github.ref_name }}
         run: |
-          VERSION_NO_PATCH=$(head "src/scaffold/__version__.py" -n 1 | cut -d "'" -f 2 | cut -d "." -f -2)
+          VERSION_NO_PATCH=$(echo "${TAG#v}" | cut -d'.' -f1-2)
           git fetch origin gh-pages --depth=1
           mike set-default latest --allow-undefined
           mike deploy --push --update-aliases "$VERSION_NO_PATCH" latest

@@ -94,7 +94,6 @@ select `Pages`, change the branch to `gh-pages`, and add any custom domains and 
 │   └── scaffold  # your actual project code
 │       ├── __init__.py
 │       ├── __main__.py
-│       ├── __version__.py
 │       ├── calculator.py  # docstrings with doctest
 │       └── foo.py
 ├── tests

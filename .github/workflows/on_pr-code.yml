@@ -13,39 +13,6 @@ concurrency:
 
 
 jobs:
-  check_version:
-    runs-on: ubuntu-latest
-    env:
-      VERSION_FILE_PATH: src/scaffold/__version__.py
-
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          path: source
-
-      - name: Checkout destination
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-        with:
-          ref: ${{ github.base_ref }}
-          path: destination
-
-      - name: Check version
-        run: |
-          # Check semver by turning it into a 7 digit int for comparison
-          function semver_to_int { echo "$@" | awk -F. '{ printf("%d%03d%03d\n", $1,$2,$3); }'; }
-
-          source_version=$(head "source/$VERSION_FILE_PATH" -n 1 | cut -d "'" -f 2)
-          destination_version=$(head "destination/$VERSION_FILE_PATH" -n 1 | cut -d "'" -f 2)
-
-          if [ "$(semver_to_int "$destination_version")" -ge "$(semver_to_int "$source_version")" ]; then
-              echo -e "\e[31;1mError:\e[0m Version needs incrementing!"
-              echo "  Merge target is: $destination_version"
-              echo "  Current branch is: $source_version"
-              exit 1
-          fi
-
-
   lint_dockerfile:
     runs-on: ubuntu-latest
 
