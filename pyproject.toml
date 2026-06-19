@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools>=82.0.1"]
+requires = ["setuptools>=82.0.1", "setuptools-scm[simple]>=10.0.5"]
 build-backend = "setuptools.build_meta"
 
 
@@ -166,7 +166,6 @@ select = [
 
 
 [tool.setuptools.dynamic]
-version = {attr = "scaffold.__version__"}
 readme = {file = ["README.md"], content-type = "text/markdown"}
 
 
