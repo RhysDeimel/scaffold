@@ -30,6 +30,10 @@ jobs:
       - name: Post label instructions
         if: github.actor != 'dependabot[bot]'
         run: |
+          existing=$(gh api "repos/$REPO/issues/$PR_NUMBER/comments" \
+            --jq '[.[] | select(.user.login == "github-actions[bot]") | select(.body | contains("## Version bump"))] | length')
+          [ "$existing" -gt 0 ] && exit 0
+
           gh pr comment "$PR_NUMBER" --repo "$REPO" --body-file - <<'BODY'
           ## Version bump
 
