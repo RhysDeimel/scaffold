@@ -43,6 +43,12 @@ docs = [
     "mkdocstrings-python <=2.0.3",
     "pyspelling <=2.12.1",
 ]
+sast = [
+    "bandit<=1.9.4",
+]
+licensecheck = [
+    "licensecheck==2026.0.8",
+]
 dev = [
     {include-group = "test"},
     {include-group = "lint"},
@@ -190,8 +196,7 @@ commands = [
 
 [tool.tox.env.sast]
 description = "Static application security testing"
-deps = ["bandit"]
-dependency_groups = []
+dependency_groups = ["sast"]
 skip_install = true
 commands = [
     ["bandit", "-r", "src"]
@@ -199,15 +204,10 @@ commands = [
 
 [tool.tox.env.licensecheck]
 description = "Check for license infringements"
-deps = ["licensecheck==2025.1.0"]
-dependency_groups = []
+dependency_groups = ["licensecheck"]
 skip_install = true
-# unset FORCE_COLOR because it's causing a parsing error in the
-#  requirements library because of the ANSI escape sequences
-setenv = { FORCE_COLOR = "" }
-# TODO - remove the flag when they fix the config bug
 commands = [
-    ["licensecheck", "--show-only-failing", "--requirements-paths", "./pyproject.toml"]
+    ["licensecheck"]
 ]
 
 [tool.tox.env.lint]
