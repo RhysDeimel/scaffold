@@ -20,7 +20,7 @@ from scaffold.foo import Foo
 
 @pytest.fixture
 def redis_container():
-    def wait_until_responsive(check, timeout=30.0, pause=0.1):
+    def wait_until_responsive(check, timeout=30.0, pause=0.1):  # pragma: no cover
         clock = timeit.default_timer
         ref = clock()
         now = ref
