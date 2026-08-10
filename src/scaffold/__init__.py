@@ -6,3 +6,11 @@ Modules exported by this package:
 
 - `calulator`: Provide several sample math calculations.
 """
+
+from importlib.metadata import PackageNotFoundError, version
+
+try:
+    __version__ = version('scaffold')
+except PackageNotFoundError:
+    # package is not installed
+    pass
