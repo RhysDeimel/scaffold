@@ -6,6 +6,10 @@ on:
     branches:
       - master
 
+concurrency:
+  group: tag-master
+  queue: max
+
 permissions:
   contents: write
 
