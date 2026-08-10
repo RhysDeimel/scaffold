@@ -42,5 +42,6 @@ jobs:
           | `bump:patch` | Bug fixes, backwards compatible |
           | `bump:none`  | No release (docs, CI, chores) |
 
-          > The **version/label** status check will block merge until exactly one label is applied.
+          > [!IMPORTANT]  
+          > The **version/label** status check will block merge until a label is applied.
           BODY
