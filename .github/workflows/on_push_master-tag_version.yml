@@ -1,19 +1,17 @@
 name: Tag version on merge
 
 on:
-  push:
+  pull_request:
+    types: [closed]
     branches:
       - master
-
-concurrency:
-  group: version-tagging
-  cancel-in-progress: false
 
 permissions:
   contents: write
 
 jobs:
   tag:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -25,20 +23,12 @@ jobs:
 
       - name: Get bump label from merged PR
         id: pr
-        env:
-          REPO: ${{ github.repository }}
-          SHA: ${{ github.sha }}
         run: |
-          bump=$(gh api "repos/$REPO/commits/$SHA/pulls" | python3 - <<'EOF'
-          import json, sys
-          prs = json.load(sys.stdin)
-          if not prs:
-              print('')
-              sys.exit(0)
-          labels = [l['name'] for l in prs[0].get('labels', []) if l['name'].startswith('bump:')]
-          print(labels[0] if labels else '')
-          EOF
-          )
+          bump=$(python3 -c "
+import json, sys
+labels = [l['name'] for l in json.loads(sys.argv[1]) if l['name'].startswith('bump:')]
+print(labels[0] if labels else '')
+" '${{ toJSON(github.event.pull_request.labels) }}')
           echo "bump=$bump" >> "$GITHUB_OUTPUT"
 
       - name: Calculate next version
