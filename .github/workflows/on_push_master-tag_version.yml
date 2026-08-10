@@ -1,0 +1,70 @@
+name: Tag version on merge
+
+on:
+  push:
+    branches:
+      - master
+
+concurrency:
+  group: version-tagging
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  tag:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Get bump label from merged PR
+        id: pr
+        env:
+          REPO: ${{ github.repository }}
+          SHA: ${{ github.sha }}
+        run: |
+          bump=$(gh api "repos/$REPO/commits/$SHA/pulls" | python3 - <<'EOF'
+          import json, sys
+          prs = json.load(sys.stdin)
+          if not prs:
+              print('')
+              sys.exit(0)
+          labels = [l['name'] for l in prs[0].get('labels', []) if l['name'].startswith('bump:')]
+          print(labels[0] if labels else '')
+          EOF
+          )
+          echo "bump=$bump" >> "$GITHUB_OUTPUT"
+
+      - name: Calculate next version
+        id: version
+        if: steps.pr.outputs.bump != '' && steps.pr.outputs.bump != 'bump:none'
+        env:
+          BUMP: ${{ steps.pr.outputs.bump }}
+        run: |
+          current=$(git tag --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -1)
+          current="${current:-v0.0.0}"
+          current="${current#v}"
+          IFS='.' read -r major minor patch <<< "$current"
+
+          case "$BUMP" in
+            bump:major) major=$((major + 1)); minor=0; patch=0 ;;
+            bump:minor) minor=$((minor + 1)); patch=0 ;;
+            bump:patch) patch=$((patch + 1)) ;;
+          esac
+
+          echo "tag=v${major}.${minor}.${patch}" >> "$GITHUB_OUTPUT"
+
+      - name: Push tag
+        if: steps.version.outputs.tag != ''
+        env:
+          TAG: ${{ steps.version.outputs.tag }}
+        run: |
+          git tag "$TAG"
+          git push origin "$TAG"
+          echo "Tagged $TAG"
